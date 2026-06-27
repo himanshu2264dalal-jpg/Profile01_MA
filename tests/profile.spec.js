@@ -29,7 +29,7 @@ test('TC01_PrfileUpdate', async ({page})=>
 
     // Validating resume headline updation
     let message = await page.getByText('Profile updated successfully');
-    await expect(message).toBeVisible();
+    await expect.soft(message).toBeVisible();
     await page.locator('.lightbox.profileEditDrawer.profileUpdatedProLayer > .crossLayer > .icon').click();
 
     // Uploading resume
