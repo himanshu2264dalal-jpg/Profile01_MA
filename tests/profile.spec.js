@@ -13,6 +13,7 @@ test('TC01_PrfileUpdate', async ({page})=>
     let username = await page.getByPlaceholder('Enter your active Email ID / Username').fill('dalalhimanshu19051999@gmail.com');
     let password = await page.getByPlaceholder('Enter your password').fill('DALALHIMANSHU19051999@GMAIL.COM');
     let loginButton2 = await page.locator('//button[@type="submit"]').click();
+    console.log('Logged in Successfully..........');
 
     // Validating login
     let candidateProfile = await page.locator('//div[@class="name-wrapper"]');
@@ -24,6 +25,7 @@ test('TC01_PrfileUpdate', async ({page})=>
     await page.locator('//div[@class="widgetHead"]/child::span[@class="edit icon"]').click();
     await page.locator('#resumeHeadlineTxt').fill('abc de fg hij klmn opqr st uv w xyz');
     await page.locator('//div[@class="action s12"]/child::button').click();
+    console.log('Updated resume headline........');
 
     // Validating resume headline updation
     let message = await page.getByText('Profile updated successfully');
@@ -32,16 +34,18 @@ test('TC01_PrfileUpdate', async ({page})=>
 
     // Uploading resume
     await page.locator('//input[@id="attachCV"]').setInputFiles('testData/Resume.pdf');
+    console.log('Updated resume........');
 
     // Validating resume updation
     let resumeMessage = await page.getByText('Resume has been successfully uploaded.');
-    await expect(resumeMessage).toBeVisible();
+    await expect.soft(resumeMessage).toBeVisible();
 
     // Logout
     await page.locator('//img[@alt="naukri user profile img"]').click();
     await page.locator('//div[@class="nI-gNb-list-item"]/child::a[@title="Logout"]').click();
+    console.log('Logged out successfully........');
 
     // Validating logout
-    await expect(page.locator('//div[@class="qsb-header-container"]/child::h1')).toBeVisible();
+    await expect.soft(page.locator('//div[@class="qsb-header-container"]/child::h1')).toBeVisible();
 
 })
