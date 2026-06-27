@@ -34,7 +34,7 @@ test('TC01_PrfileUpdate', async ({page})=>
 
     // Uploading resume
     await page.locator('//input[@id="attachCV"]').setInputFiles('testData/QA_Automation_Himanshu_Resume.pdf');
-    
+    console.log('Updated resume.......')
 
     // Validating resume updation
     let resumeMessage = await page.getByText('Resume has been successfully uploaded.');
