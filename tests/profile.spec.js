@@ -1,0 +1,47 @@
+import {test, expect} from '@playwright/test'
+
+test.only('TC01_PrfileUpdate', async ({page})=>
+{
+    test.setTimeout(120000)
+
+    // Navigating naukri.com
+    await page.goto('https://www.naukri.com/')
+
+    // Login
+    let googleClose = await page.locator('iframe[title="Sign in with Google Dialogue"]').contentFrame().getByRole('button', { name: 'Close' }).click();
+    let loginButton1 = await page.locator('#login_Layer').click();
+    let username = await page.getByPlaceholder('Enter your active Email ID / Username').fill('dalalhimanshu19051999@gmail.com');
+    let password = await page.getByPlaceholder('Enter your password').fill('DALALHIMANSHU19051999@GMAIL.COM');
+    let loginButton2 = await page.locator('//button[@type="submit"]').click();
+
+    // Validating login
+    let candidateProfile = await page.locator('//div[@class="name-wrapper"]');
+    await expect.soft(candidateProfile).toBeVisible();
+
+    // Updating resume headline
+    await page.locator('//img[@alt="naukri user profile img"]/parent::div/preceding-sibling::div').click();
+    await page.locator("//a[text()='View & Update Profile']").click();
+    await page.locator('//div[@class="widgetHead"]/child::span[@class="edit icon"]').click();
+    await page.locator('#resumeHeadlineTxt').fill('abc de fg hij klmn opqr st uv w xyz');
+    await page.locator('//div[@class="action s12"]/child::button').click();
+
+    // Validating resume headline updation
+    let message = await page.getByText('Profile updated successfully');
+    await expect(message).toBeVisible();
+    await page.locator('.lightbox.profileEditDrawer.profileUpdatedProLayer > .crossLayer > .icon').click();
+
+    // Uploading resume
+    await page.locator('//input[@id="attachCV"]').setInputFiles('testData/Resume.pdf');
+
+    // Validating resume updation
+    let resumeMessage = await page.getByText('Resume has been successfully uploaded.');
+    await expect(resumeMessage).toBeVisible();
+
+    // Logout
+    await page.locator('//img[@alt="naukri user profile img"]').click();
+    await page.locator('//div[@class="nI-gNb-list-item"]/child::a[@title="Logout"]').click();
+
+    // Validating logout
+    await expect(page.locator('//div[@class="qsb-header-container"]/child::h1')).toBeVisible();
+
+})
