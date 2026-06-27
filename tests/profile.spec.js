@@ -1,6 +1,6 @@
 import {test, expect} from '@playwright/test'
 
-test.only('TC01_PrfileUpdate', async ({page})=>
+test('TC01_PrfileUpdate', async ({page})=>
 {
     test.setTimeout(120000)
 
@@ -10,8 +10,8 @@ test.only('TC01_PrfileUpdate', async ({page})=>
     // Login
     let googleClose = await page.locator('iframe[title="Sign in with Google Dialogue"]').contentFrame().getByRole('button', { name: 'Close' }).click();
     let loginButton1 = await page.locator('#login_Layer').click();
-    let username = await page.getByPlaceholder('Enter your active Email ID / Username').fill('dalalhimanshu19051999@gmail.com');
-    let password = await page.getByPlaceholder('Enter your password').fill('DALALHIMANSHU19051999@GMAIL.COM');
+    let username = await page.getByPlaceholder('Enter your active Email ID / Username').fill('himanshud7078@gmail.com');
+    let password = await page.getByPlaceholder('Enter your password').fill('HIMANSHUD7078@GMAIL.COM');
     let loginButton2 = await page.locator('//button[@type="submit"]').click();
 
     // Validating login
@@ -22,7 +22,7 @@ test.only('TC01_PrfileUpdate', async ({page})=>
     await page.locator('//img[@alt="naukri user profile img"]/parent::div/preceding-sibling::div').click();
     await page.locator("//a[text()='View & Update Profile']").click();
     await page.locator('//div[@class="widgetHead"]/child::span[@class="edit icon"]').click();
-    await page.locator('#resumeHeadlineTxt').fill('abc de fg hij klmn opqr st uv w xyz');
+    await page.locator('#resumeHeadlineTxt').fill('QA Automation Engineer with 3.5+ years of experience in Playwright, Selenium WebDriver, Java, JavaScript, API Testing, Jenkins, SQL, and Agile Scrum.');
     await page.locator('//div[@class="action s12"]/child::button').click();
 
     // Validating resume headline updation
@@ -31,7 +31,7 @@ test.only('TC01_PrfileUpdate', async ({page})=>
     await page.locator('.lightbox.profileEditDrawer.profileUpdatedProLayer > .crossLayer > .icon').click();
 
     // Uploading resume
-    await page.locator('//input[@id="attachCV"]').setInputFiles('testData/Resume.pdf');
+    await page.locator('//input[@id="attachCV"]').setInputFiles('testData/QA_Automation_Himanshu_Resume.pdf');
 
     // Validating resume updation
     let resumeMessage = await page.getByText('Resume has been successfully uploaded.');
