@@ -13,6 +13,7 @@ test('TC01_PrfileUpdate', async ({page})=>
     let username = await page.getByPlaceholder('Enter your active Email ID / Username').fill('himanshud7078@gmail.com');
     let password = await page.getByPlaceholder('Enter your password').fill('HIMANSHUD7078@GMAIL.COM');
     let loginButton2 = await page.locator('//button[@type="submit"]').click();
+    console.log('Logged in Successfully..........');
 
     // Validating login
     let candidateProfile = await page.locator('//div[@class="name-wrapper"]');
@@ -24,24 +25,27 @@ test('TC01_PrfileUpdate', async ({page})=>
     await page.locator('//div[@class="widgetHead"]/child::span[@class="edit icon"]').click();
     await page.locator('#resumeHeadlineTxt').fill('QA Automation Engineer with 3.5+ years of experience in Playwright, Selenium WebDriver, Java, JavaScript, API Testing, Jenkins, SQL, and Agile Scrum.');
     await page.locator('//div[@class="action s12"]/child::button').click();
+    console.log('Updated resume headline........');
 
     // Validating resume headline updation
     let message = await page.getByText('Profile updated successfully');
-    await expect(message).toBeVisible();
+    await expect.soft(message).toBeVisible();
     await page.locator('.lightbox.profileEditDrawer.profileUpdatedProLayer > .crossLayer > .icon').click();
 
     // Uploading resume
     await page.locator('//input[@id="attachCV"]').setInputFiles('testData/QA_Automation_Himanshu_Resume.pdf');
+    
 
     // Validating resume updation
     let resumeMessage = await page.getByText('Resume has been successfully uploaded.');
-    await expect(resumeMessage).toBeVisible();
+    await expect.soft(resumeMessage).toBeVisible();
 
     // Logout
     await page.locator('//img[@alt="naukri user profile img"]').click();
     await page.locator('//div[@class="nI-gNb-list-item"]/child::a[@title="Logout"]').click();
+    console.log('Logged out successfully........');
 
     // Validating logout
-    await expect(page.locator('//div[@class="qsb-header-container"]/child::h1')).toBeVisible();
+    await expect.soft(page.locator('//div[@class="qsb-header-container"]/child::h1')).toBeVisible();
 
 })
