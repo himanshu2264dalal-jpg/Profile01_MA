@@ -1,6 +1,6 @@
 import {test, expect} from '@playwright/test'
 
-test.only('TC01_PrfileUpdate', async ({page})=>
+test('TC01_PrfileUpdate', async ({page})=>
 {
     test.setTimeout(120000)
 
