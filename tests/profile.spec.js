@@ -16,7 +16,7 @@ test('TC01_PrfileUpdate', async ({page})=>
     console.log('\nLogged in Successfully..........');
 
     // ===================== Validating login =================================
-    let candidateProfile = await page.locator('//div[@class="name-wrapper"]');
+    // let candidateProfile = await page.locator('//div[@class="name-wrapper"]');
     // await expect.soft(candidateProfile).toBeVisible();
 
     // ======================= Updating resume headline =========================
